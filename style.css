@@ -10,7 +10,9 @@
 body {
 
 }
-
+.bg-primary {
+    background-color: var(--green) !important;
+}
 .btn {
     border-radius: 1.25rem;
     padding: 0.3rem 0.75rem;
@@ -80,6 +82,7 @@ body {
     font-size: 28px;
     margin-left: 10px;
 }
+
 
 /*  Parte movil */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
