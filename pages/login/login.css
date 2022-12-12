@@ -4,6 +4,13 @@
     --dark-green: #023B2A;
     --purple: #9B6BE3;
 }
+.navbar .btn {
+    border-radius: 1.25rem;
+    padding: 0.3rem 0.75rem;
+}
+.bg-primary {
+    background-color: var(--green) !important;
+}
 .bg-image-vertical {
     position: relative;
     overflow: hidden;
