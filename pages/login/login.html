@@ -45,16 +45,6 @@
                             <li><a class="dropdown-item" href="#adultos">ADULTOS</a></li>
                         </ul>
 
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#iniciarses">INICIAR SESIÓN</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <button class="btn btn-outline-warning" type="submit">RESERVAR CANCHA</button>
-                    </li>
-                    
                 </ul>
             </div>
         </div>
@@ -66,11 +56,6 @@
               <div class="row">
                 <div class="col-sm-6 text-black">
           
-                  <div class="px-5 ms-xl-4">
-                    <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
-                    <span class="h1 fw-bold mb-0">Logo</span>
-                  </div>
-          
                   <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
           
                     <form style="width: 23rem;">
@@ -78,17 +63,17 @@
                       <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Iniciar Sesión</h3>
           
                       <div class="form-outline mb-4">
-                        <input type="email" id="form2Example18" class="form-control form-control-lg" />
+                        <input id="email" type="email" id="form2Example18" class="form-control form-control-lg" />
                         <label class="form-label" for="form2Example18">Correo electronico</label>
                       </div>
           
                       <div class="form-outline mb-4">
-                        <input type="password" id="form2Example28" class="form-control form-control-lg" />
+                        <input id="password" type="password" id="form2Example28" class="form-control form-control-lg" />
                         <label class="form-label" for="form2Example28">Conntraseña</label>
                       </div>
           
                       <div class="pt-1 mb-4">
-                        <button class="btn btn-info btn-lg btn-block" type="button">Ingresar</button>
+                        <button id="submitData" class="btn btn-info btn-lg btn-block" type="button">Ingresar</button>
                       </div>
                       <p>¿No tienes cuenta? <a href="../regist/regist.html" class="link-info">Registrate aqui</a></p>
           
@@ -226,10 +211,57 @@
           <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
         </div>
         <!-- Copyright -->
-      </footer>
+    </footer>
 
-    
-
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDjjRzryAsBMUP-HaM-dea77z-U_O7T32M",
+    authDomain: "vaicari-pia.firebaseapp.com",
+    projectId: "vaicari-pia",
+    storageBucket: "vaicari-pia.appspot.com",
+    messagingSenderId: "357452801766",
+    appId: "1:357452801766:web:cc93fad597bd0a584bbd27"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const database = getDatabase(app);
+
+  submitData.addEventListener('click', (e) => {
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const user =userCredential.user
+        var lgDate = new Date();
+        update(ref(database, 'users/' + user.uid), {
+                last_login: lgDate,
+            })
+            .then(() => {
+                alert('user logged in successfully');
+            })
+            .catch((error) => {
+                alert(error);
+            });
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+    });
+
+  });
+</script>
