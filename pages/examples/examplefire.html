@@ -41,6 +41,8 @@
     submitData.addEventListener('click', (e) => {
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
+
+
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
@@ -57,14 +59,13 @@
                 alert(error);
             });
         })
-        
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             // ..
             alert(errorMessage);
         });
-        
+
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user =userCredential.user
