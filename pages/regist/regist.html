@@ -48,15 +48,6 @@
             </ul>
 
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#iniciarses">INICIAR SESIÓN</a>
-          </li>
-
-          <li class="nav-item">
-            <button class="btn btn-outline-warning" type="submit">RESERVAR CANCHA</button>
-          </li>
-
         </ul>
       </div>
     </div>
@@ -107,7 +98,7 @@
                       </div>
                     </div>
 
-                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <div class="d-flex justify-content-left mx-4 mb-3 mb-lg-4">
                       <button id="submitData" type="button" class="btn btn-primary btn-lg">Registrarse</button>
                     </div>
 
@@ -126,13 +117,97 @@
       </div>
     </div>
   </section>
+  <footer class="bg-primary text-center text-lg-start text-white">
+    <!-- Grid container -->
+    <div class="container p-4">
+        <!--Grid row-->
+        <div class="row my-4">
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+
+                <div class="shadow-1-strong d-flex align-items-center justify-content-center mb-4 mx-auto"
+                    style="width: 150px; height: 150px;">
+                    <img src="../../img/logoraqueta.png" height="150rem" alt="Vaicari Logo" loading="lazy" />
+                </div>
+
+                <p class="text-center">TEPIC, NAYARIT, MEXICO <br> Telefono: 311-141-8943 <br> Horario: 8:00am - 10pm</p>
+
+                <ul class="list-unstyled d-flex flex-row justify-content-center">
+                    <li>
+                        <a class="text-white px-2" href="#!">
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-white px-2" href="#!">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="text-white ps-2" href="#!">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+     
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4">PATROCINADORES OFICIALES</h5>
+
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <img src="../../img/sponsor/coca.png" height="80rem" alt="" loading="lazy" />
+                        <img src="../../img/sponsor/arena.png" height="80rem" alt="" loading="lazy" />
+                        <img src="../../img/sponsor/utr.png" height="80rem" alt="" loading="lazy" />
+                    </li>
+                    <li class="mb-2">
+                        <img src="../../img/sponsor/motul.png" height="80rem" width="250rem" alt="" loading="lazy" />
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4">Plataformas Informativas</h5>
+
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="https://app.universaltennis.com/clubs/13932" class="text-white"><i class="fas fa-paw pe-3"></i>UTR</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://www.instagram.com/vaicari.tennis/" class="text-white"><i class="fas fa-paw pe-3"></i>Instagram</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="https://www.facebook.com/profile.php?id=100065271181082" class="text-white"><i class="fas fa-paw pe-3"></i>Facebook</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4">Marca de ropa</h5>
+
+                <ul class="list-unstyled">
+                    <a href="https://www.instagram.com/ropaolympus/?hl=es" class="text-white"><i class="fas fa-paw pe-3"></i>Olympus Sport</a> 
+                </ul>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: #023B2A">
+        <p>Vaicari Tennis 2022 ® <br> Desarrollo Web por Edgar Ruiz</p>
+    </div>
+</footer>
 </body>
 
 </html>
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendSignInLinkToEmail } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
   import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -160,18 +235,9 @@
     var actionCodeSettings = {
       // URL you want to redirect back to. The domain (www.example.com) for this
       // URL must be in the authorized domains list in the Firebase Console.
-      url: 'https://edgarrd11.github.io/vaicaripia/',
+      url: "http://localhost:3000",
       // This must be true.
-      handleCodeInApp: true,
-      iOS: {
-        bundleId: 'com.example.ios'
-      },
-      android: {
-        packageName: 'com.example.android',
-        installApp: true,
-        minimumVersion: '12'
-      },
-      dynamicLinkDomain: 'example.page.link'
+      handleCodeInApp: true
     };
 
     createUserWithEmailAndPassword(auth, email, password, password2)
@@ -187,20 +253,22 @@
             password: password
           })
             .then(() => {
-              alert('user created successfully');
+              //Te envia a la pagina donde ya esta iniciada la sesión
+              window.location.assign('../logged/logged.html');
+              console.log('user created successfully');
               //Envia el email una vez que hubo un registro exitoso
-              firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-                .then(() => {
-                  // The link was successfully sent. Inform the user.
-                  alert('email send it succesfully');
-                  // ...
-                })
-                .catch((error) => {
-                  var errorCode = error.code;
-                  var errorMessage = error.message;
-                  alert(errorMessage);
-                  // ...
-                });
+              // sendSignInLinkToEmail(email, actionCodeSettings)
+              //   .then(() => {
+              //     // The link was successfully sent. Inform the user.
+              //     alert('email send it succesfully');
+              //     // ...
+              //   })
+              //   .catch((error) => {
+              //     var errorCode = error.code;
+              //     var errorMessage = error.message;
+              //     alert(errorMessage);
+              //     // ...
+              //   });
             })
             .catch((error) => {
               alert(error);
@@ -211,10 +279,13 @@
 
       })
       .catch((error) => {
+        if(email || password || name || password2 == "") {
+          alert("Introduzca los datos correctamente");
+        }
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
-        alert(errorMessage);
+        console.log(errorMessage);
       });
   });
 </script>

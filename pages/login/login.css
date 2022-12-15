@@ -4,6 +4,14 @@
     --dark-green: #023B2A;
     --purple: #9B6BE3;
 }
+.btn-info {
+    color: var(--sand);
+    background-color: var(--green);
+    border-color: var(--dark-green);
+}
+.link-info {
+    color: var(--green);
+}
 .navbar .btn {
     border-radius: 1.25rem;
     padding: 0.3rem 0.75rem;
